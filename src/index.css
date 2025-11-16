@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.home-force-white {
+  color: #ffffff;
+}
+.home-force-white * {
+  border-color: currentColor;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+:root {
+  --scrollbar-size: 8px;
+  --scrollbar-thumb-opacity: 0.18;
+  --scrollbar-thumb-hover-opacity: 0.28;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text) transparent;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text) transparent;
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8f79db; /* usa a cor do texto/tema */
+  opacity: var(--scrollbar-thumb-opacity);
+  border-radius: 999px;
+  border: 2px solid transparent; /* espaçamento interno para aparência leve */
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  opacity: var(--scrollbar-thumb-hover-opacity);
+}
+
+::-webkit-scrollbar-thumb:focus {
+  opacity: 0.45;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
