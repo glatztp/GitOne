@@ -1,13 +1,14 @@
-import { useEffect, type JSX } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, type JSX } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   GithubLogo,
   LinkSimple,
   ChartLineUp,
   Lightbulb,
 } from "@phosphor-icons/react";
-
 import Beams from "./Beams";
+import ConnectModal from "./ui/ConnectModal";
 
 export default function Home(): JSX.Element {
   useEffect(() => {
@@ -20,19 +21,20 @@ export default function Home(): JSX.Element {
     }
   }, []);
 
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  function handleConfirm(name: string) {
+    navigate(`/dashboard?user=${encodeURIComponent(name)}`);
+    setShowModal(false);
+  }
+
   return (
     <div className="relative w-full overflow-x-hidden bg-black home-force-white">
       <header className="absolute top-0 z-20 flex w-full items-center justify-between py-6 px-4 sm:px-8">
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="GitOne Logo" className="h-24 w-24" />
         </div>
-
-        <button
-          className="flex h-10 items-center justify-center rounded-full border border-primary/50 bg-surface-dark/50 px-4 text-sm font-medium text-primary-light transition-all hover:border-primary hover:bg-surface-dark hover:shadow-glow-primary"
-          aria-label="Entrar"
-        >
-          <span className="truncate">Entrar</span>
-        </button>
       </header>
 
       <main className="relative z-10">
@@ -51,25 +53,65 @@ export default function Home(): JSX.Element {
 
         <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden p-4">
           <div className="relative z-10 flex w-full max-w-7xl flex-col items-center text-center">
-            <div className="flex flex-col items-center justify-center pt-24 pb-16 h-full">
-             
-              <h2 className="font-manifesto-title text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none tracking-tighter text-white uppercase mt-10">
-                <span className="block font-extrabold ">GITHUB.</span>
-                <span className="block font-extrabold text-[#8f79db]">
+            <div className="flex flex-col items-center justify-center pt-10 pb-16 h-full">
+              <motion.h2
+                className="font-manifesto-title text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none tracking-tighter text-white uppercase mt-10"
+                initial="hidden"
+                animate="visible"
+                variants={{ hidden: {}, visible: {} }}
+              >
+                <motion.span
+                  className="block font-extrabold"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ delay: 0.08, duration: 0.5 }}
+                >
+                  GITHUB.
+                </motion.span>
+                <motion.span
+                  className="block font-extrabold text-[#8f79db]"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ delay: 0.18, duration: 0.6 }}
+                >
                   YOUR DATA.
-                </span>
-                <span className="block font-extrabold">MASTERED.</span>
-              </h2>
+                </motion.span>
+                <motion.span
+                  className="block font-extrabold"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ delay: 0.28, duration: 0.6 }}
+                >
+                  MASTERED.
+                </motion.span>
+              </motion.h2>
 
-              <p className="mt-8 mb-10 max-w-2xl text-xl font-manifesto-desc italic text-text-dark/90 md:text-2xl">
+              <motion.p
+                className="mt-8 mb-10 max-w-2xl text-xl font-manifesto-desc italic text-text-dark/90 md:text-2xl"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.45 }}
+              >
                 Unleash unprecedented insights and elevate your development
                 journey.
-              </p>
+              </motion.p>
 
               <div className="mt-4 flex flex-col items-center gap-4 w-full max-w-xs sm:max-w-none">
-                <button
-                  className="flex h-14 w-full sm:w-[280px] items-center justify-center gap-2 rounded-full bg-primary px-6 text-lg font-bold text-background-dark shadow-lg shadow-primary/30 transition-transform hover:scale-105"
+                <motion.button
+                  onClick={() => setShowModal(true)}
+                  className="flex h-14 w-full sm:w-[280px] items-center justify-center gap-2 rounded-full bg-primary px-6 text-lg font-bold text-background-dark shadow-lg shadow-primary/30 border"
                   aria-label="Connect with GitHub"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.35 }}
+                  whileHover={{ scale: 1.04, translateY: -3 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <GithubLogo
                     size={28}
@@ -78,14 +120,13 @@ export default function Home(): JSX.Element {
                     aria-hidden
                   />
                   <span>Connect with GitHub</span>
-                </button>
+                </motion.button>
 
-                <Link
-                  to="/dashboard"
-                  className="flex h-14 w-full sm:w-[280px] items-center justify-center gap-2 rounded-full border border-primary/50 bg-surface-dark/50 px-6 text-lg font-medium text-primary-light transition-all hover:border-primary hover:bg-surface-dark"
-                >
-                  Explore Dashboard
-                </Link>
+                <ConnectModal
+                  open={showModal}
+                  onClose={() => setShowModal(false)}
+                  onConfirm={handleConfirm}
+                />
               </div>
             </div>
           </div>

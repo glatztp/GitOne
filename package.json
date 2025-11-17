@@ -23,6 +23,14 @@
     "tailwindcss": "^4.1.17",
     "three": "^0.181.1"
   },
+  "dependenciesMeta": {
+    "framer-motion": {
+      "optional": false
+    }
+  },
+  "resolutions": {
+    "framer-motion": "^10.12.16"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.0",

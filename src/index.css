@@ -21,6 +21,55 @@ body {
   --scrollbar-thumb-hover-opacity: 0.28;
 }
 
+/* Theme variables to improve dashboard visuals */
+:root {
+  --bg: #8f64db; /* page background */
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.02);
+  --text: #e6eef8;
+  --muted: rgba(230, 238, 248, 0.7);
+  --primary: #8f79db;
+  --primary-600: #7a5bd0;
+  --border-dark: rgba(255, 255, 255, 0.06);
+  --accent: #5fd3c1;
+  --glass-blur: 6px;
+}
+
+/* Simple utility classes used by components (keeps Tailwind usage intact) */
+.bg-surface {
+  background: linear-gradient(180deg, var(--bg) 0%, #000000 100%);
+}
+
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid var(--border-dark);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 6px 18px rgba(4, 6, 12, 0.6);
+}
+
+.text-emphasized {
+  color: var(--text);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.brand {
+  color: var(--primary);
+}
+
+/* Make images inside profile cards look a bit more prominent */
+.card img.rounded-full {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.04);
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--text) transparent;
